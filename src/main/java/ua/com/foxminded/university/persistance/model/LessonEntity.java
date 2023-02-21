@@ -35,6 +35,7 @@ public class LessonEntity {
     @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id", referencedColumnName = "id")
+
     private SubjectEntity subject;
 
     @ManyToOne(fetch = FetchType.LAZY,

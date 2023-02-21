@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ua.com.foxminded.university.persistance.model.LessonEntity;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -15,8 +16,8 @@ public interface LessonRepository extends JpaRepository<LessonEntity, Long> {
             "join GroupEntity g on s.group.id = g.id " +
             "join LessonEntity l on g.id = l.group.id " +
             "where s.id = :id " +
-            "and date_trunc('day', l.startTime) = :date")
-    List<LessonEntity> findAllLessonsForDayByStudentIdAndDate(Long id, Date date);
+            "and date_trunc('day', l.startTime) = (:date)")
+    List<LessonEntity> findAllLessonsForDayByStudentIdAndDate(Long id, ZonedDateTime date);
 
     @Query(value = "select l from StudentEntity s " +
             "join fetch GroupEntity g on s.group.id = g.id " +
